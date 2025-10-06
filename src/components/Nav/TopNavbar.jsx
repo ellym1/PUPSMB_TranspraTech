@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Logo from '../../assets/svg/Logo';
 import ButtonPrimary from '../Buttons/ButtonPrimary';
+import ButtonSecondary from '../Buttons/ButtonSecondary';
 
-export default function TopNavbar() {
+export default function TopNavbar({ handleLoginClick }) {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -53,7 +55,12 @@ export default function TopNavbar() {
             </a>
           </li>
         </ul>
-        <ButtonPrimary className="ml-10">Get Started</ButtonPrimary>
+        <div className="flex items-center space-x-4">
+          <ButtonSecondary onClick={handleLoginClick}>Log In</ButtonSecondary>
+          <Link to="/signup">
+            <ButtonPrimary>Sign Up</ButtonPrimary>
+          </Link>
+        </div>
       </div>
       
       {/* Mobile menu button */}
@@ -116,7 +123,12 @@ export default function TopNavbar() {
               </a>
             </li>
             <li className="pt-4">
-              <ButtonPrimary className="w-full">Get Started</ButtonPrimary>
+              <ButtonSecondary onClick={() => { handleLoginClick(); setMobileMenuOpen(false); }} className="w-full">Log In</ButtonSecondary>
+            </li>
+            <li>
+              <Link to="/signup" onClick={() => setMobileMenuOpen(false)}>
+                <ButtonPrimary className="w-full">Sign Up</ButtonPrimary>
+              </Link>
             </li>
           </ul>
         </div>
